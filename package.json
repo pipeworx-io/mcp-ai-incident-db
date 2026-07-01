@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-ai-incident-db",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "AI Incident Database (AIID) MCP",
   "type": "module",
   "main": "src/index.ts",

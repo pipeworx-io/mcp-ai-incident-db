@@ -3,7 +3,7 @@
   "name": "io.github.pipeworx-io/ai-incident-db",
   "title": "Ai Incident Db",
   "description": "AI Incident Database (AIID) MCP",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "websiteUrl": "https://pipeworx.io/packs/ai-incident-db",
   "repository": {
     "url": "https://github.com/pipeworx-io/mcp-ai-incident-db",

@@ -2,13 +2,13 @@
 
 AI Incident Database (AIID) MCP
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 673+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1160+ live data sources.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `get_incident` | Fetch full incident record with linked reports. |
+| `get_incident` | Fetch a full AI Incident Database record by numeric incident_id; returns title, date, description, alleged deployer/developer/harmed parties, and all linked news report URLs. |
 | `list_recent` | Most recently added incidents. |
 | `list_taxonomies` | Taxonomies used to classify incidents (CSET-AIID, GMF, RAIC). |
 
@@ -26,7 +26,7 @@ Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
 }
 ```
 
-Or connect to the full Pipeworx gateway for access to all 673+ data sources:
+Or connect to the full Pipeworx gateway for access to all 1160+ data sources:
 
 ```json
 {

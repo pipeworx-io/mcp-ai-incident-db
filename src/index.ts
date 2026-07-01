@@ -51,7 +51,7 @@ const tools: McpToolExport['tools'] = [
   },
   {
     name: 'get_incident',
-    description: 'Fetch full incident record with linked reports.',
+    description: 'Fetch a full AI Incident Database record by numeric incident_id; returns title, date, description, alleged deployer/developer/harmed parties, and all linked news report URLs.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -92,14 +92,16 @@ async function callTool(name: string, args: Record<string, unknown>): Promise<un
 
 async function searchIncidents(args: Record<string, unknown>) {
   const filter: Record<string, unknown> = {};
-  if (args.query) filter['title'] = { CONTAINS: String(args.query) };
+  // AIID's StringFilter dropped CONTAINS; use REGEX (case-insensitive) with the
+  // query escaped to a literal substring match.
+  if (args.query) filter['title'] = { REGEX: String(args.query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), OPTIONS: 'i' };
   if (args.start_date) filter['date'] = { ...(filter.date as object ?? {}), GTE: String(args.start_date) };
   if (args.end_date) filter['date'] = { ...(filter.date as object ?? {}), LTE: String(args.end_date) };
   const limit = Math.min(200, Math.max(1, (args.limit as number) ?? 25));
   const skip = Math.max(0, (args.offset as number) ?? 0);
   const query = `query SearchIncidents($filter: IncidentFilterType, $pagination: PaginationType, $sort: IncidentSortType) {
     incidents(filter: $filter, pagination: $pagination, sort: $sort) {
-      incident_id title date description editors_notes
+      incident_id title date description
     }
   }`;
   return graphql(query, {
@@ -112,8 +114,8 @@ async function searchIncidents(args: Record<string, unknown>) {
 async function getIncident(id: number) {
   const query = `query GetIncident($filter: IncidentFilterType) {
     incident(filter: $filter) {
-      incident_id title date description editors_notes
-      AllegedDeployerOfAISystem AllegedDeveloperOfAISystem AllegedHarmedOrNearlyHarmedParties
+      incident_id title date description
+      AllegedDeployerOfAISystem { entity_id name } AllegedDeveloperOfAISystem { entity_id name } AllegedHarmedOrNearlyHarmedParties { entity_id name }
       reports { report_number title url source_domain date_published authors language }
       editors { userId }
     }
