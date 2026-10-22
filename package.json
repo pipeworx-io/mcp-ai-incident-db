@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-ai-incident-db",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "AI Incident Database (AIID) MCP",
   "type": "module",
   "main": "src/index.ts",
@@ -26,7 +26,7 @@
     "@cloudflare/workers-types": "^4.20260405.1"
   },
   "pipeworx": {
-    "sourceHash": "v1-9c1b967f668444372982621f61ab08185882cd397437526ef33324beae74d668",
-    "sourceCommit": "351c40908821cfecc9bb2f5849d87bbfdbb26d75"
+    "sourceHash": "v1-2cb8816b69ad0333677a6a78dbe0687a71b01a413b7f0521d042abdffcd5c58d",
+    "sourceCommit": "71f5325b13bb0ea0de2f0f7207885962ec91a484"
   }
 }
